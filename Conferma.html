@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conferma</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: red;">Grazie amore per passare con me questo giorno ❤️</h1>
+        <p id="selectedDate"></p>
+    </div>
+
+    <script>
+        // Estrai la data dall'URL e mostra nella pagina
+        const urlParams = new URLSearchParams(window.location.search);
+        const date = urlParams.get('date');
+        if (date) {
+            document.getElementById('selectedDate').innerText = `Data selezionata: ${date}`;
+        }
+    </script>
+</body>
+</html>

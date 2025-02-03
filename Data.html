@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleziona una Data</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sei libera il...</h1>
+        <p>Seleziona una data:</p>
+        <input type="text" id="datePicker" placeholder="Seleziona una data">
+        <button onclick="submitDate()">Conferma</button>
+        <p id="warningMessage" style="display: none; color: red;">Sei proprio sicura quel giorno??</p>
+    </div>
+
+    <script>
+        flatpickr("#datePicker", {
+            altInput: true,
+            altFormat: "F j, Y",
+            dateFormat: "Y-m-d",
+        });
+
+        function submitDate() {
+            const date = document.getElementById('datePicker').value;
+            const warningMessage = document.getElementById('warningMessage');
+            const selectedDate = new Date(date);
+            const targetDate = new Date('2025-02-14');
+
+            if (date) {
+                if (selectedDate.getTime() !== targetDate.getTime()) {
+                    warningMessage.style.display = 'block';
+                    setTimeout(() => {
+                        warningMessage.style.display = 'none';
+                        location.href = `conferma.html?date=${encodeURIComponent(date)}`;
+                    }, 60000);
+                } else {
+                    location.href = `conferma.html?date=${encodeURIComponent(date)}`;
+                }
+            } else {
+                alert('Per favore, seleziona una data.');
+            }
+        }
+    </script>
+</body>
+</html>
